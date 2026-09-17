@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PVM skaičiuoklė 2026</title>
+  <meta name="description" content="PVM skaičiuoklė 2026 — pridėkite arba išskaičiuokite PVM. Tarifai 21%, 12%, 9%, 5%, 0%." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blue: #2ea8ff;
+      --blue-dark: #1b9af0;
+      --hero: #3db4ff;
+      --green: #22c55e;
+      --text: #222;
+      --muted: #555;
+      --line: #e6e6e6;
+      --header-bg: #ececec;
+      --radius: 6px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif;
+      color: var(--text);
+      background: #fff;
+    }
+    a { color: #1a73e8; }
+    .topbar {
+      background: #111;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 24px;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 18px;
+      text-decoration: none;
+      color: #fff;
+    }
+    .logo {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: #111; border: 2px solid #fff;
+      display: grid; place-items: center;
+      font-size: 10px; font-weight: 800;
+    }
+    .topbar nav { display: flex; gap: 18px; font-size: 14px; flex-wrap: wrap; }
+    .topbar nav a { color: #fff; text-decoration: none; opacity: .92; }
+    .btn-green {
+      background: #22c55e;
+      color: #fff;
+      border: 0;
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .hero {
+      background: var(--hero);
+      color: #fff;
+      text-align: center;
+      padding: 56px 20px 48px;
+    }
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+    .hero p { margin: 0; font-size: 16px; opacity: .95; }
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 36px 20px 80px;
+    }
+    .lead {
+      text-align: center;
+      color: #333;
+      font-size: 18px;
+      margin: 0 0 28px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    @media (max-width: 820px) {
+      .grid { grid-template-columns: 1fr; }
+      .topbar nav { display: none; }
+    }
+    .label {
+      display: block;
+      font-size: 14px;
+      margin: 0 0 8px;
+    }
+    .seg {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+    .seg button {
+      background: #fff;
+      border: 1px solid #d9d9d9;
+      border-radius: var(--radius);
+      padding: 10px 16px;
+      font: inherit;
+      cursor: pointer;
+      min-width: 72px;
+    }
+    .seg button.active {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+      font-weight: 600;
+    }
+    .row-input {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+    input[type="text"] {
+      border: 1px solid #bbb;
+      border-radius: var(--radius);
+      padding: 10px 12px;
+      font: inherit;
+      font-weight: 700;
+      width: 180px;
+    }
+    input[type="text"]:focus { outline: 2px solid #9ad4ff; border-color: var(--blue); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+    }
+    th, td {
+      border: 1px solid #d8d8d8;
+      padding: 10px 12px;
+      text-align: left;
+    }
+    th { background: var(--header-bg); font-weight: 700; }
+    td.num, th.num { text-align: right; white-space: nowrap; font-weight: 600; }
+    tr.total td {
+      background: var(--green);
+      color: #fff;
+      font-weight: 700;
+    }
+    .hint { color: var(--muted); font-size: 13px; margin-top: 18px; line-height: 1.45; }
+    .rates-note {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #444;
+      line-height: 1.55;
+    }
+    .rates-note h2 { font-size: 18px; margin: 0 0 10px; }
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 20px;
+      text-align: center;
+      color: #777;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="https://site.pro/lt/" target="_blank" rel="noopener">
+      <span class="logo">SP</span> Site.pro
+    </a>
+    <nav>
+      <a href="https://site.pro/lt/">Svetainių konstruktorius</a>
+      <a href="https://site.pro/lt/Apskaita/">Apskaitos programa</a>
+      <a href="https://site.pro/lt/Atlyginimo-skaičiuoklė/">Atlyginimo skaičiuoklė</a>
+    </nav>
+    <a class="btn-green" href="https://site.pro/lt/" target="_blank" rel="noopener">Registruotis</a>
+  </header>
+
+  <section class="hero">
+    <h1>PVM skaičiuoklė 2026</h1>
+    <p>Pridėkite PVM prie kainos arba išskaičiuokite jį iš galutinės sumos</p>
+  </section>
+
+  <main class="wrap">
+    <p class="lead">2026 m. PVM skaičiuoklė — suma be PVM, PVM ir suma su PVM pagal Lietuvos tarifus</p>
+
+    <div class="grid">
+      <div>
+        <span class="label">Veiksmas:</span>
+        <div class="seg" id="modeSeg">
+          <button type="button" data-mode="add" class="active">Pridėti PVM</button>
+          <button type="button" data-mode="extract">Išskaičiuoti PVM</button>
+        </div>
+
+        <span class="label">PVM tarifas:</span>
+        <div class="seg" id="rateSeg">
+          <button type="button" data-rate="21" class="active">21%</button>
+          <button type="button" data-rate="12">12%</button>
+          <button type="button" data-rate="9">9%</button>
+          <button type="button" data-rate="5">5%</button>
+          <button type="button" data-rate="0">0%</button>
+        </div>
+
+        <label class="label" id="amountLabel" for="amount">Suma be PVM (€):</label>
+        <div class="row-input">
+          <input id="amount" type="text" inputmode="decimal" value="100" autocomplete="off" />
+        </div>
+
+        <p class="hint">
+          Galima rašyti 100, 100.50 arba 1 234,56. Skaičiuojama iškart, apvalinant iki cento.
+        </p>
+      </div>
+
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>Rezultatas</th>
+              <th class="num" id="resultHead">121,00 €</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Suma be PVM</td>
+              <td class="num" id="net">100,00 €</td>
+            </tr>
+            <tr>
+              <td>PVM <span id="vatRateLabel">21%</span></td>
+              <td class="num" id="vat">21,00 €</td>
+            </tr>
+            <tr class="total">
+              <td>Suma su PVM</td>
+              <td class="num" id="gross">121,00 €</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <section class="rates-note">
+      <h2>PVM tarifai 2026</h2>
+      <p><strong>21%</strong> — standartinis, daugumai prekių ir paslaugų.</p>
+      <p><strong>12%</strong> — lengvatinis: apgyvendinimas, keleivių vežimas, kultūros renginiai.</p>
+      <p><strong>9%</strong> — pereinamieji atvejai (pvz., užsakymai, registruoti iki 2025-12-31).</p>
+      <p><strong>5%</strong> — lengvatinis: vaistai, medicinos priemonės, knygos, neperiodiniai leidiniai.</p>
+      <p><strong>0%</strong> — nulinis tarifas (eksportas ir kiti įstatymo atvejai). Tai nėra tas pats kaip neapmokestinimas.</p>
+      <p>Skaičiuoklė informacinė. Ji nedaro deklaracijų ir nevertina, ar lengvata jums taikoma.</p>
+    </section>
+  </main>
+
+  <footer>PVM skaičiuoklė Site.pro stiliumi · tarifai 2026</footer>
+
+  <script>
+    const state = { mode: "add", rate: 21 };
+
+    const amountEl = document.getElementById("amount");
+    const amountLabel = document.getElementById("amountLabel");
+    const netEl = document.getElementById("net");
+    const vatEl = document.getElementById("vat");
+    const grossEl = document.getElementById("gross");
+    const resultHead = document.getElementById("resultHead");
+    const vatRateLabel = document.getElementById("vatRateLabel");
+
+    function parseAmount(raw) {
+      if (raw == null) return NaN;
+      let s = String(raw).trim().replace(/\s/g, "").replace(",", ".");
+      if (!s) return NaN;
+      const n = Number(s);
+      if (!Number.isFinite(n) || n < 0 || n > 1e9) return NaN;
+      return n;
+    }
+
+    function money(n) {
+      return n.toFixed(2).replace(".", ",") + " €";
+    }
+
+    function round2(n) {
+      return Math.round(n * 100) / 100;
+    }
+
+    function calc() {
+      const rate = state.rate / 100;
+      const input = parseAmount(amountEl.value);
+      vatRateLabel.textContent = state.rate + "%";
+
+      if (!Number.isFinite(input)) {
+        netEl.textContent = "—";
+        vatEl.textContent = "—";
+        grossEl.textContent = "—";
+        resultHead.textContent = "—";
+        return;
+      }
+
+      let net, vat, gross;
+      if (state.mode === "add") {
+        net = round2(input);
+        vat = round2(net * rate);
+        gross = round2(net + vat);
+      } else {
+        gross = round2(input);
+        net = round2(gross / (1 + rate));
+        vat = round2(gross - net);
+      }
+
+      netEl.textContent = money(net);
+      vatEl.textContent = money(vat);
+      grossEl.textContent = money(gross);
+      resultHead.textContent = money(state.mode === "add" ? gross : net);
+    }
+
+    function setActive(group, attr, value) {
+      group.querySelectorAll("button").forEach((b) => {
+        b.classList.toggle("active", b.dataset[attr] === String(value));
+      });
+    }
+
+    document.getElementById("modeSeg").addEventListener("click", (e) => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+      state.mode = btn.dataset.mode;
+      setActive(e.currentTarget, "mode", state.mode);
+      amountLabel.textContent = state.mode === "add" ? "Suma be PVM (€):" : "Suma su PVM (€):";
+      calc();
+    });
+
+    document.getElementById("rateSeg").addEventListener("click", (e) => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+      state.rate = Number(btn.dataset.rate);
+      setActive(e.currentTarget, "rate", state.rate);
+      calc();
+    });
+
+    amountEl.addEventListener("input", calc);
+    calc();
+  </script>
+</body>
+</html>
